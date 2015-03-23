@@ -234,6 +234,9 @@
     <ClCompile Include="monster\m_supertank.c">
       <Filter>monster</Filter>
     </ClCompile>
+    <ClCompile Include="monster\m_tank.c">
+      <Filter>monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="a_ctf.h">
@@ -360,6 +363,9 @@
       <Filter>monster</Filter>
     </ClInclude>
     <ClInclude Include="monster\m_supertank.h">
+      <Filter>monster</Filter>
+    </ClInclude>
+    <ClInclude Include="monster\m_tank.h">
       <Filter>monster</Filter>
     </ClInclude>
   </ItemGroup>

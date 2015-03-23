@@ -875,6 +875,7 @@
     <ClCompile Include="monster\m_parasite.c" />
     <ClCompile Include="monster\m_soldier.c" />
     <ClCompile Include="monster\m_supertank.c" />
+    <ClCompile Include="monster\m_tank.c" />
     <ClCompile Include="m_move.c">
       <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug Alpha|Win32'">Disabled</Optimization>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug Alpha|Win32'">WIN32;_DEBUG;_WINDOWS;C_ONLY</PreprocessorDefinitions>
@@ -1053,6 +1054,7 @@
     <ClInclude Include="monster\m_rider.h" />
     <ClInclude Include="monster\m_soldier.h" />
     <ClInclude Include="monster\m_supertank.h" />
+    <ClInclude Include="monster\m_tank.h" />
     <ClInclude Include="m_player.h" />
     <ClInclude Include="q_shared.h" />
     <ClInclude Include="tng_irc.h" />
