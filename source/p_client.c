@@ -1822,7 +1822,13 @@ void InitClientPersistant(gclient_t * client)
 	}
 
 	client->pers.health = 100;
-	client->pers.max_health = 100;
+	if (coop->value == 1) {
+		client->pers.max_health = 150;
+	}
+	else {
+		client->pers.max_health = 100;
+	}
+	
 	//zucc changed maximum ammo amounts
 	client->pers.max_bullets = 2;
 	client->pers.max_shells = 14;

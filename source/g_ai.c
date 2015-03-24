@@ -475,8 +475,14 @@ FindTarget (edict_t * self)
     {
       client = level.sight_client;
       if (!client)
-	return false;		// no clients to get mad at
-    }
+		return false;		// no clients to get mad at
+	  // Check if player is a spectator
+	  if (client->client) {
+		  if (client->client->ps.pmove.pm_type == PM_SPECTATOR) {
+			  return false;
+		  }
+	  }
+  }
 
   // if the entity went away, forget it
   if (!client->inuse)

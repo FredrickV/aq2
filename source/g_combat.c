@@ -249,6 +249,16 @@ void Killed (edict_t * targ, edict_t * inflictor, edict_t * attacker, int damage
 		monster_death_use (targ);
 	}
 
+	if (IsMonster(targ)) {
+		// Reward player on killing the monster in order to give player a chance to survive
+		if (!IsMonster(inflictor)) {
+			inflictor->health += 5;
+			if (inflictor->max_health < inflictor->health) {
+				inflictor->health = inflictor->max_health;
+			}
+		}
+	}
+
 	targ->die (targ, inflictor, attacker, damage, point);
 }
 
@@ -1065,6 +1075,7 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 		}
 	}
 	else {
+		if (IsMonster(targ)) {
 		// Monsters take reduced damage (so they have a chance to fight)
 		damage /= 4;
 
@@ -1168,7 +1179,7 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 
 			}
 		}
-	
+	}
 	if (damage_type && !instant_dam)	// bullets but not vest hits
 	{
 		vec3_t temp;
@@ -1485,13 +1496,15 @@ T_RadiusDamage (edict_t * inflictor, edict_t * attacker, float damage,
 		//points = points * 0.5; 
 		if (points > 0)
 		{
-#ifdef _DEBUG
+//#ifdef _DEBUG
 			if (0 == Q_stricmp (ent->classname, "func_explosive"))
 			{
-				CGF_SFX_ShootBreakableGlass (ent, inflictor, 0, mod);
+
+				trace_t tr;
+				CGF_SFX_ShootBreakableGlass (ent, inflictor, &tr, mod);
 			}
-			else
-#endif
+//			else
+//#endif
 			if (CanDamage (ent, inflictor))
 			{
 				VectorSubtract (ent->s.origin, inflictor->s.origin, dir);

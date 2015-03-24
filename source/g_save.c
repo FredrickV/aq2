@@ -495,13 +495,6 @@ void InitGame (void)
 		gi.dprintf("Turning deathmatch on.\n");
 		gi.cvar_forceset("deathmatch", "1");
 	}*/
-	// FredNO COOP On:
-	/*
-	if (coop->value)
-	{
-		gi.dprintf("Turning coop off.\n");
-		gi.cvar_forceset("coop", "0");
-	}*/
 
 	if (coop->value) {
 		CGF_SFX_InstallGlassSupport();	// william for CGF (glass fx)

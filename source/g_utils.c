@@ -574,11 +574,8 @@ qboolean KillBox (edict_t * ent)
 
 qboolean IsMonster(edict_t *edict)
 {
-	// TODO: Also check SP
-	if (coop->value == 1) {
-		if (edict->client == NULL) {
-			return true;
-		}
+	if (edict->svflags & SVF_MONSTER) {
+		return true;
 	}
 	return false;
 }

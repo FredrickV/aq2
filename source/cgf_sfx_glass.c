@@ -274,6 +274,7 @@ CGF_SFX_ShootBreakableGlass (edict_t * aGlassPane, edict_t * anAttacker,
     case MOD_HANDGRENADE:
     case MOD_HG_SPLASH:
     case MOD_KNIFE:		// slash damage
+	case MOD_BARREL:	// Coop game barrel explosion
       destruct = true;
       break;
     default:
