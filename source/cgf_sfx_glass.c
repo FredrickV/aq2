@@ -117,10 +117,15 @@ extern "C"
 void
 CGF_SFX_InstallGlassSupport ()
 {
-  breakableglass = gi.cvar ("breakableglass", "0", 0);
+  breakableglass = gi.cvar ("breakableglass", "1", 0);
   glassfragmentlimit = gi.cvar ("glassfragmentlimit", "30", 0);
 }
 
+
+void CGF_SFX_UninstallGlassSupport()
+{
+	breakableglass = gi.cvar("breakableglass", "0", 0);
+}
 
 int
 CGF_SFX_IsBreakableGlassEnabled ()
@@ -142,7 +147,7 @@ CGF_SFX_TestBreakableGlassAndRemoveIfNot_Think (edict_t *
   trace_t trace;
 
   // test for cvar
-  if (!CGF_SFX_IsBreakableGlassEnabled ())
+  if (!CGF_SFX_IsBreakableGlassEnabled () || deathmatch->value == 1)
     {
       G_FreeEdict (aPossibleGlassEntity);
       return;

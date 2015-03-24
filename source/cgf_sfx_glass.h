@@ -47,8 +47,10 @@
 //
 
 void CGF_SFX_InstallGlassSupport ();
-// registers cvar breakableglass (default 0)
+// registers cvar breakableglass (default 1)
 // registers cvar glassfragmentlimit (default 30)
+
+void CGF_SFX_UninstallGlassSupport();
 
 
 void CGF_SFX_RebuildAllBrokenGlass ();

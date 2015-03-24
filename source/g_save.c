@@ -503,6 +503,13 @@ void InitGame (void)
 		gi.cvar_forceset("coop", "0");
 	}*/
 
+	if (coop->value) {
+		CGF_SFX_InstallGlassSupport();	// william for CGF (glass fx)
+	}
+	else {
+		CGF_SFX_UninstallGlassSupport();
+	}
+
 	// change anytime vars
 	dmflags = gi.cvar ("dmflags", "0", CVAR_SERVERINFO);
 	fraglimit = gi.cvar ("fraglimit", "0", CVAR_SERVERINFO);
@@ -645,8 +652,6 @@ void InitGame (void)
 	darkmatch = gi.cvar ("darkmatch", "0", CVAR_LATCH);	// Darkmatch
 	day_cycle = gi.cvar ("day_cycle", "10", 0);	// Darkmatch cycle time.
 	use_classic = gi.cvar ("use_classic", "0", CVAR_SERVERINFO);	// Reset Spread and Grenade Strength to 1.52
-
-	CGF_SFX_InstallGlassSupport ();	// william for CGF (glass fx)
 
 	g_select_empty = gi.cvar ("g_select_empty", "0", CVAR_ARCHIVE);
 

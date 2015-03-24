@@ -2095,3 +2095,7 @@ extern int pause_time;
 #define PARSE_BUFSIZE 256
 
 #include "a_ctf.h"
+
+
+// Fred
+qboolean IsMonster(edict_t *edict);

@@ -1509,6 +1509,13 @@ void kick_attack (edict_t * ent)
 		if (tr.ent->health <= 0)
 			return;
 
+		// If Coop/SP monster, make the target more rigid, 
+		// increase damage dealt as a reward to the player for taking close combat risk
+		if (IsMonster(tr.ent)) {
+			kick /= 4;
+			damage *= 3;
+		}
+
 		if (teamplay->value)
 		{
 			// AQ2:TNG - JBravo adding UVtime
