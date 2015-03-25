@@ -2099,3 +2099,4 @@ extern int pause_time;
 
 // Fred
 qboolean IsMonster(edict_t *edict);
+qboolean IsPlayer(edict_t *edict);

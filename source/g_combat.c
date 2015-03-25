@@ -249,9 +249,9 @@ void Killed (edict_t * targ, edict_t * inflictor, edict_t * attacker, int damage
 		monster_death_use (targ);
 	}
 
-	if (IsMonster(targ)) {
+	if (targ->deadflag == 0 && IsMonster(targ)) {
 		// Reward player on killing the monster in order to give player a chance to survive
-		if (!IsMonster(inflictor)) {
+		if (IsPlayer(inflictor)) {
 			inflictor->health += 5;
 			if (inflictor->max_health < inflictor->health) {
 				inflictor->health = inflictor->max_health;
@@ -1076,6 +1076,15 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 	}
 	else {
 		if (IsMonster(targ)) {
+			// Stats Start
+			if ((attacker->client) && (mod != MOD_M3) && (mod != MOD_HC)) {
+				if (!teamplay->value || team_round_going || stats_afterround->value) {
+					attacker->client->resp.stats_hits[mod]++;
+					attacker->client->resp.stats_shots_h++;
+				}
+			}
+			// Stats End
+
 		// Monsters take reduced damage (so they have a chance to fight)
 		damage /= 4;
 
@@ -1083,19 +1092,19 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 		case MOD_MK23:
 		case MOD_DUAL:
 		case MOD_MP5:
-			knockback = 10;
-			break;
-		case MOD_M4:
 			knockback = 20;
 			break;
-		case MOD_SNIPER:
+		case MOD_M4:
 			knockback = 40;
+			break;
+		case MOD_SNIPER:
+			knockback = 80;
 			break;
 		case MOD_KNIFE:
 			knockback = 0;
 			break;
 		case MOD_KNIFE_THROWN:
-			knockback = 5;
+			knockback = 10;
 			break;
 		}
 
@@ -1136,6 +1145,11 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 
 			if (head_success)
 			{
+				// Stats Start
+				attacker->client->resp.last_damaged_part = LOC_HDAM;
+				attacker->client->resp.stats_locations[LOC_HDAM]++;
+				// Stats End
+
 				damage = damage * 1.8 + 1;
 				damage_type = LOC_HDAM;
 				if (mod != MOD_KNIFE && mod != MOD_KNIFE_THROWN)
@@ -1146,6 +1160,11 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 			}
 			else if (z_rel < LEG_DAMAGE)
 			{
+				// Stats Start
+				attacker->client->resp.last_damaged_part = LOC_LDAM;
+				attacker->client->resp.stats_locations[LOC_LDAM]++;
+				// Stats End
+
 				damage = damage * .25;
 				
 				damage_type = LOC_LDAM;
@@ -1155,6 +1174,11 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 			}
 			else if (z_rel < STOMACH_DAMAGE)
 			{
+				// Stats Start
+				attacker->client->resp.last_damaged_part = LOC_SDAM;
+				attacker->client->resp.stats_locations[LOC_SDAM]++;
+				// Stats End
+
 				damage = damage * .4;
 				damage_type = LOC_SDAM;
 				//TempFile bloody gibbing
@@ -1167,6 +1191,11 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 			}
 			else		//(z_rel < CHEST_DAMAGE)
 			{
+				// Stats Start
+				attacker->client->resp.last_damaged_part = LOC_CDAM;
+				attacker->client->resp.stats_locations[LOC_CDAM]++;
+				// Stats End
+
 				damage = damage * .65;
 				damage_type = LOC_CDAM;
 				//TempFile bloody gibbing

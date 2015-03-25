@@ -579,3 +579,11 @@ qboolean IsMonster(edict_t *edict)
 	}
 	return false;
 }
+
+qboolean IsPlayer(edict_t *edict)
+{
+	if (!Q_stricmp(edict->classname, "player")) {
+		return true;
+	}
+	return false;
+}
